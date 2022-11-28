@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../components/Registro/login/login.component';
 import { RegistroCComponent } from '../components/Registro/registro-c/registro-c.component';
+import { HomeComponent } from 'src/components/Registro/home/home.component';
+
 
 
 const routes: Routes = [
@@ -16,6 +18,7 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     RegistroCComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
