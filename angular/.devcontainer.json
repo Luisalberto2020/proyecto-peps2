@@ -5,13 +5,20 @@
 	"image": "mcr.microsoft.com/devcontainers/typescript-node:16-bullseye",
 	"mounts": 
 	[
-    "source=${localWorkspaceFolder}/server,target=/app,type=bind,consistency=cached"
+    "source=${localWorkspaceFolder},target=/app,type=bind,consistency=cached"
 	],
+	 "extensions": [
+		"Angular.ng-template",
+		"ms-vsliveshare.vsliveshare",
+		"tal7aouy.icons"
+
+
+	], 
 	"build": {
         "args": {
             "network": "host"
         }
-    }
+    },
 
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
