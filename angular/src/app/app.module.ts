@@ -6,11 +6,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from '../components/Registro/login/login.component';
 import { RegistroCComponent } from '../components/Registro/registro-c/registro-c.component';
 import { HomeComponent } from 'src/components/Registro/home/home.component';
+import { ProductosComponent } from 'src/components/productos/productos/productos.component';
 
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'registroc', component: RegistroCComponent },
+  { path: 'productos', component: ProductosComponent },
 ];
 
 @NgModule({
@@ -19,6 +22,7 @@ const routes: Routes = [
     LoginComponent,
     RegistroCComponent,
     HomeComponent,
+    ProductosComponent,
   ],
   imports: [
     BrowserModule,
