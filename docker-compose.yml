@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  web:
+    build: angular
+    ports:
+      - "8080:80"
+
+  server:
+    build: server
+    ports:
+      - "3000:3000"
+
+  
+
+  db:
+    image: mariadb:10.3
+    restart: always
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_HOST: root
+      MYSQL_ROOT_PASSWORD: C4ndeeDandee
+    volumes:
+     - /home/ciber2/ciber/caca:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 9090:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db

@@ -1,1 +1,7 @@
-FROM python:3.11.0-alpine3.16
+FROM python
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+RUN pip install flask
+COPY . .
+CMD ["sleep", "infinity"]

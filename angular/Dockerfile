@@ -7,5 +7,5 @@ RUN npm run build --prod
 
 
 #stage 2
-FROM nginx:alpine
-COPY --from=node /app/dist/demo-app /usr/share/nginx/html
+FROM httpd:2.4.51-alpine
+COPY --from=node /app/dist/angular /usr/local/apache2/htdocs/
