@@ -16,15 +16,16 @@ export class RegistroCComponent {
 
 
     const options = {
-        method: 'POST',
+        method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
         },
         body: JSON.stringify({email, passwd, admin}),
 
     }
     console.log(options);
-      fetch('http://localhost:5000/crear').then(res => res.json()).then(data => {
+      fetch('http://localhost:5000/crearusuario',options).then(res => res.json()).then(data => {
         if (data.status === 200) {
           this.router.navigate(['/login']);
         }else {

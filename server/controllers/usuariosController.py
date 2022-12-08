@@ -1,21 +1,40 @@
-from flask import Blueprint
 import json
+
+from flask import Blueprint, request
+from controllers.usuario_repository import UsuariosRepository
 
 usuarios_bluebrint = Blueprint('usuarios_bluebrint', __name__)
 
-@usuarios_bluebrint.route('/crear')
-def crear():
+@usuarios_bluebrint.route('/crearusuario', methods=['POST'])
+def crear_usuario():
+    headers = request.headers
+    if headers['Content-Type'] != 'application/json':
+        code = 401
+        response = {
+            'code': code,
+            'message': 'Content-Type debe ser application/json'
+        }
+    else:
+        data = json.loads(request.data)
+        email = data['email']
+        password = data['password']
+        admin = data['admin']
 
-    fdatos2 ='{ "nombre": "Juan", "apellido": [ "a", "b", "c" ] }'
-    dicionario = json.loads(fdatos2)
-    print(dicionario)
-    print(dicionario["nombre"])
+        try:
+            usuario_repository = UsuariosRepository()
+            usuario_repository.crear_usuario(email, password, admin)
+        except Exception as e:
+            code = 401
+            response = {
+                'code': code,
+                'message': 'Error al crear usuario',
+            }
+            print(e)
+        
+    res = flask.response(response, code)
+    res.headers['Content-Type'] = 'application/json'
+    res.headers['Access-Control-Allow-Origin'] = '*'
 
-    datos:dict = {
-        'nombre': 'Juan',
-        'apellido': ['a', 'b', 'c'],
-    } 
-    datos['nombre'] 
-    return json.dumps(datos, indent=4)
+    return res
 
 
