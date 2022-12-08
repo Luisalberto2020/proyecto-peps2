@@ -1,18 +1,18 @@
 <div class="container">
   <div class="row justify-content-md-center">
     <div class="col col-xl-6 col-lg-4">
-<form>
+<form (submit)="registrar($event,email.value,passwd.value,true)">
   <h1>Registro de usuario</h1>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input #email type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
       <div id="emailHelp" class="form-text">No compartiremos su información privada con nadie.</div>
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">¿Eres administrador?</label>
+      <label #admin class="form-check-label" value="true" for="exampleCheck1">¿Eres administrador?</label>
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Contrase&ntilde;a</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
+      <input #passwd type="password" class="form-control" id="exampleInputPassword1">
     </div>
     <div class="mb-3 form-check">
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -20,6 +20,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
+
     </div>
   </div>
 </div>

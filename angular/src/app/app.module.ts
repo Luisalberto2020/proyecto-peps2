@@ -12,7 +12,7 @@ import { ProductosComponent } from 'src/components/productos/productos/productos
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'registroc', component: RegistroCComponent },
+  { path: 'registro', component: RegistroCComponent },
   { path: 'productos', component: ProductosComponent },
 ];
 
