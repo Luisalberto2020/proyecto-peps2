@@ -28,7 +28,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	 "postCreateCommand": "npm install -g @angular/cli && npm install"
+	 "postCreateCommand": "npm install -g @angular/cli@15.0.1 && npm install"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
