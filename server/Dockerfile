@@ -4,4 +4,4 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 RUN pip install flask
 COPY . .
-CMD ["sleep", "infinity"]
+CMD ["python", "app.py"]

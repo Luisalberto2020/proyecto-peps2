@@ -9,7 +9,7 @@ services:
   server:
     build: server
     ports:
-      - "3000:3000"
+      - "5000:5000"
 
   
 
@@ -19,9 +19,15 @@ services:
     environment:
       MYSQL_DATABASE: db
       MYSQL_ROOT_HOST: root
-      MYSQL_ROOT_PASSWORD: C4ndeeDandee
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
     volumes:
-     - /home/ciber2/ciber/caca:/var/lib/mysql
+     #- /home/ciber2/ciber/db:/var/lib/mysql
+     - H:\MisDocumentos\documentos\proyectos\proyecto-peps2\db:/var/lib/mysql
+     # mysql -u root -p
+     #GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password';
+
 
   phpmyadmin:
     image: phpmyadmin
