@@ -12,7 +12,7 @@ export class RegistroCComponent {
 
 
 
-  registrar(event:Event,email:string, passwd:string,admin:boolean ){
+  registrar(event:Event,email:string, password:string,admin:boolean ){
 
 
     const options = {
@@ -21,7 +21,7 @@ export class RegistroCComponent {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*"
         },
-        body: JSON.stringify({email, passwd, admin}),
+        body: JSON.stringify({email, password, admin}),
 
     }
     console.log(options);
