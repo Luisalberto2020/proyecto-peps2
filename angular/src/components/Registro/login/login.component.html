@@ -1,17 +1,15 @@
 <h1>Inicio de sesión</h1>
-<form (submit)="prueba(paswd.value)">
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Usuario</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">Nunca compartiremos su información personal</div>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-      <input type="password" class="form-control" #paswd>
-    </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Usuario</label>
+    <input #email type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">Nunca compartiremos su información personal</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+    <input type="password" class="form-control" #passwd>
+  </div>
 
-    <button type="submit" class="btn btn-primary">Enviar</button>
-  </form>
+  <button (click)="loguearse(email.value,passwd.value)" class="btn btn-primary">Enviar</button>
 
   <select class="form-select" aria-label="Default select example">
     <option selected>Selecciona su región</option>
@@ -19,3 +17,7 @@
     <option value="2">Reino Unido</option>
     <option value="3">Resto del mundo </option>
   </select>
+
+  <div *ngIf="mostrarFallo" class="alert alert-danger" role="alert">
+    ¡ERROR! Usuario o contraseña incorrectos
+  </div>
