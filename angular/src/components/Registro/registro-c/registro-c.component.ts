@@ -32,7 +32,6 @@ export class RegistroCComponent {
           this.mostrarFallo = true;
         }
       });
-      event.preventDefault();
   }
 
 }

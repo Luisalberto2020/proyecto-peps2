@@ -26,8 +26,8 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: user
     volumes:
-      - /home/ciber2/ciber/db:/var/lib/mysql
-     #- H:\MisDocumentos\documentos\proyectos\proyecto-peps2\db:/var/lib/mysql
+      #- /home/ciber2/ciber/db:/var/lib/mysql
+     - H:\MisDocumentos\documentos\proyectos\proyecto-peps2\db:/var/lib/mysql
      # mysql -u root -p
      #GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';
 
