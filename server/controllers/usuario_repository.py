@@ -13,3 +13,16 @@ class UsuariosRepository(dBConnector):
         )
         self.mydb.commit()
         self.mydb.close()
+
+    def login_usuario(self, email:str, password:str):
+        cursor = self.useDatabase()
+        password_encrypted = sha256(password.encode()).hexdigest()
+
+        cursor.execute(
+            "SELECT * FROM usuarios WHERE email = %s AND password = %s", 
+            (email, password_encrypted)
+        )
+        result = cursor.fetchone()
+        self.mydb.commit()
+        self.mydb.close()
+        return result 
