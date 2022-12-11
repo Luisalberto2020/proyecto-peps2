@@ -12,12 +12,15 @@ import { NavComponent } from '../components/productos/nav/nav.component';
 import { ShopComponent } from '../components/productos/shop/shop.component';
 import { AddProductoComponent } from '../components/productos/add-producto/add-producto.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
+import { CookieService } from 'ngx-cookie-service';
+import { LoginGuard } from 'src/Guards/LoginGuard';
 
 
 
 
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroCComponent },
   { path: 'productos', component: ProductosComponent },
@@ -26,7 +29,8 @@ const routes: Routes = [
     children:[
       {path:'add',component:AddProductoComponent},
       {path:'',component:ListProductosComponent}
-    ]
+    ],
+    canActivate:[LoginGuard]
   },
   {path:'**',component:NotFoundComponent}
 ];
@@ -44,13 +48,13 @@ const routes: Routes = [
     ShopComponent,
     AddProductoComponent,
     NotFoundComponent,
-   
+
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [CookieService,LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

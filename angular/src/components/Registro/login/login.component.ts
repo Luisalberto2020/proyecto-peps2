@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 mostrarFallo:Boolean = false;
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,private cookies:CookieService) { }
   loguearse(email:string, password:string ){
     const options = {
         method: "POST",
@@ -22,9 +23,9 @@ mostrarFallo:Boolean = false;
     }
     console.log(options);
       fetch('http://localhost:5000/loginusuario',options).then(res => res.json()).then(data => {
-        if (data.status === 200) {
-          this.router.navigate(['home']);
-          console.log(data);
+        if (data.code === 200) {
+          this.cookies.set("token",data.token)
+          this.router.navigate(['tienda']);
         }else {
           this.mostrarFallo = true;
         }
