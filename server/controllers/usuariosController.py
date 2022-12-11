@@ -1,12 +1,12 @@
 import json
 import logging
 
-
-from repository.dBConnect import dBConnector
 from flask import Blueprint, request
-from repository.usuario_repository import UsuariosRepository
 from flask_cors import cross_origin
-
+from repository.dBConnect import dBConnector
+from repository.usuario_repository import UsuariosRepository
+from utils.jwt_utils import Jwtutils
+from markupsafe import Markup
 
 usuarios_bluebrint = Blueprint('usuarios_bluebrint', __name__)
 
@@ -28,7 +28,7 @@ def crear_usuario():
             password = data['password']
             admin = data['admin']
             usuario_repository = UsuariosRepository()
-            usuario_repository.crear_usuario(email, password, admin)
+            usuario_repository.crear_usuario(Markup(email), Markup(password), Markup(admin))
         except Exception as e:
             code = 401
             response = {
@@ -57,8 +57,7 @@ def login_usuario():
             usuario = usuario_repository.login_usuario(email, password)
             logging.error(f'usuario {usuario}')
             if usuario is not None:
-                token = Jwtutils()
-                token_string = token.create_token(usuario[0], usuario[3])
+                token_string = Jwtutils.create_token(usuario[0], usuario[3])
                 logging.error(f'token_string {token_string}')
                 code = 200
                 response = {
