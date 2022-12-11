@@ -38,12 +38,12 @@ class dBConnector():
         cursor.execute(
             "CREATE TABLE IF NOT EXISTS productos"+
              "(id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50)," +
-             " precio FLOAT, url VARCHAR(255))"
+             " precio DECIMAL(10,2), url VARCHAR(255))"
             )
         cursor.execute(
             "CREATE TABLE IF NOT EXISTS usuarios"+
                 "(id INT AUTO_INCREMENT PRIMARY KEY,"+
-                "email VARCHAR(150) UNIQUE, password VARCHAR(255),admin BOOLEAN)"
+                "email VARCHAR(150) UNIQUE, password VARCHAR(255),admin BOOLEAN, dinero Decimal(10,2))"
         )
         self.mydb.commit()
         self.mydb.close()

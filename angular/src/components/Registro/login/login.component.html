@@ -9,14 +9,9 @@
     <input type="password" class="form-control" #passwd>
   </div>
 
-  <button (click)="loguearse(email.value,passwd.value)" class="btn btn-primary">Enviar</button>
+  <button (click)="loguearse(email.value,passwd.value)" class="btn btn-primary ">Enviar</button>
 
-  <select class="form-select" aria-label="Default select example">
-    <option selected>Selecciona su región</option>
-    <option value="1">España</option>
-    <option value="2">Reino Unido</option>
-    <option value="3">Resto del mundo </option>
-  </select>
+
 
   <div *ngIf="mostrarFallo" class="alert alert-danger" role="alert">
     ¡ERROR! Usuario o contraseña incorrectos

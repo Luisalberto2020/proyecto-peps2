@@ -20,10 +20,13 @@ import { LoginGuard } from 'src/Guards/LoginGuard';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'registro', component: RegistroCComponent },
-  { path: 'productos', component: ProductosComponent },
+  {
+     path: '', component: HomeComponent,
+      children: [
+        { path: '', component: LoginComponent },
+        { path: 'registro', component: RegistroCComponent }
+      ]
+    },
   {
     path: 'tienda',component:ShopComponent,
     children:[

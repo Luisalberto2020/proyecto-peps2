@@ -2,9 +2,9 @@ import json
 import logging
 
 
-from controllers.jwt_utils import Jwtutils
+from repository.dBConnect import dBConnector
 from flask import Blueprint, request
-from controllers.usuario_repository import UsuariosRepository
+from repository.usuario_repository import UsuariosRepository
 from flask_cors import cross_origin
 
 

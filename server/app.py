@@ -1,7 +1,7 @@
 
 from flask import Flask
 from controllers.usuariosController import usuarios_bluebrint
-from controllers.dBConnect import dBConnector
+from repository.dBConnect import dBConnector
 from flask_cors import CORS
 
 app = Flask(__name__)
