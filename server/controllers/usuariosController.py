@@ -1,4 +1,6 @@
 import json
+import logging
+
 
 from controllers.jwt_utils import Jwtutils
 from flask import Blueprint, request
@@ -53,9 +55,11 @@ def login_usuario():
             password = data['password']
             usuario_repository = UsuariosRepository()
             usuario = usuario_repository.login_usuario(email, password)
+            logging.error(f'usuario {usuario}')
             if usuario is not None:
                 token = Jwtutils()
                 token_string = token.create_token(usuario[0], usuario[3])
+                logging.error(f'token_string {token_string}')
                 code = 200
                 response = {
                     'code': code,

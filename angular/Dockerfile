@@ -1,9 +1,10 @@
 #stage 1 solo compila el proyecto de angular
 FROM node:latest as node
 WORKDIR /app
-COPY . .
 RUN npm install -g @angular/cli@15.0.1
+COPY package.json .
 RUN npm install
+COPY . .
 RUN ng build --configuration production
 
 

@@ -23,7 +23,7 @@ mostrarFallo:Boolean = false;
     console.log(options);
       fetch('http://localhost:5000/loginusuario',options).then(res => res.json()).then(data => {
         if (data.status === 200) {
-          //this.router.navigate(['/home']);
+          this.router.navigate(['home']);
           console.log(data);
         }else {
           this.mostrarFallo = true;
