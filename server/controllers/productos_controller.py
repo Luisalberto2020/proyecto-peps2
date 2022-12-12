@@ -6,7 +6,7 @@ from repository.productos_repository import ProductoRepository
 from model.producto import Producto
 
 
-productos_bluebrint = Blueprint('usuarios_bluebrint', __name__)
+productos_bluebrint = Blueprint('productos_bluebrint', __name__)
 
 @productos_bluebrint.route('/crearproducto', methods=['POST'])
 @cross_origin()

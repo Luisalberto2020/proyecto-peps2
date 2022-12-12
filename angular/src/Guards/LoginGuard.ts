@@ -12,7 +12,7 @@ export class LoginGuard implements CanActivate {
     if (this.cookies.get("token")) {
         return true;
     } else {
-      this.router.navigate(["login"]);
+      this.router.navigate([""]);
       return false;
     }
   }
