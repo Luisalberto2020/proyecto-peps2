@@ -23,6 +23,6 @@ class ProductoRepository(dBConnector):
 
         productos = []
         for producto in result:
-            productos.append(Producto(producto[0], producto[1], producto[2], producto[3]))
+            productos.append(Producto(producto[0], producto[1], float(producto[2]), producto[3]))
 
         return productos

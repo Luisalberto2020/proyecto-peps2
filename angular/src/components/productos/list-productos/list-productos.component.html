@@ -1,3 +1,13 @@
 <h1 class="text-center">Lista de Productos</h1>
-<br>
-
+<br />
+<div class="container text-center">
+<div class="row">
+    <div class="col-6" *ngFor="let producto of productos; index as i">
+    <app-productos
+        [producto]="producto"
+        [admin]="true"
+        [index]="i"
+    ></app-productos>
+    </div>
+</div>
+</div>

@@ -8,7 +8,7 @@ import { Producto } from 'src/model/Producto';
   styleUrls: ['./list-productos.component.scss']
 })
 export class ListProductosComponent implements OnInit {
-  poductos: Producto[] = [];
+  productos: Producto[] = [];
 
   constructor(private cookies:CookieService) { }
 
@@ -21,9 +21,9 @@ export class ListProductosComponent implements OnInit {
         'Access-Control-Allow-Origin': '*',
       },
     };
-    fetch('http://localhost:3000/getproductos', options).then(res => res.json()).then(data => {
+    fetch('http://localhost:5000/getproductos', options).then(res => res.json()).then(data => {
       for (let i = 0; i < data.length; i++) {
-        this.poductos.push(new Producto(data[i].id, data[i].nombre, data[i].precio));
+        this.productos.push(new Producto(data[i].id, data[i].nombre, data[i].precio, data[i].url));
       }
 
     });

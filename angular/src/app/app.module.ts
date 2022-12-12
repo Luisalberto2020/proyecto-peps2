@@ -14,6 +14,7 @@ import { AddProductoComponent } from '../components/productos/add-producto/add-p
 import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginGuard } from 'src/Guards/LoginGuard';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -55,7 +56,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
   providers: [CookieService,LoginGuard],
   bootstrap: [AppComponent]
