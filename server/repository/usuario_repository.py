@@ -8,7 +8,7 @@ class UsuariosRepository(dBConnector):
         password_encrypted = sha256(password.encode()).hexdigest()
 
         cursor.execute(
-            "INSERT INTO usuarios (email, password, admin,dinero) VALUES (%s, %s, %s,0)", 
+            "INSERT INTO usuarios (email, password, admin, dinero) VALUES (%s, %s, %s,0)", 
             (email, password_encrypted, admin)
         )
         self.mydb.commit()

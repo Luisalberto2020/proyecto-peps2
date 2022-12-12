@@ -28,7 +28,13 @@ def crear_usuario():
             password = data['password']
             admin = data['admin']
             usuario_repository = UsuariosRepository()
-            usuario_repository.crear_usuario(Markup(email), Markup(password), Markup(admin))
+            usuario_repository.crear_usuario(Markup(email), Markup(password), admin)
+            code = 200
+            response = {
+                'code': code,
+                'message': 'Usuario creado correctamente',
+            }
+            
         except Exception as e:
             code = 401
             response = {

@@ -4,6 +4,7 @@ import json
 from markupsafe import Markup
 from repository.productos_repository import ProductoRepository
 from model.producto import Producto
+from utils.jwt_utils import Jwtutils
 
 
 productos_bluebrint = Blueprint('productos_bluebrint', __name__)
@@ -19,19 +20,20 @@ def crear_producto():
             'message': 'Content-Type debe ser application/json'
         }
     else:
-        try:
-            data = json.loads(request.data)
-            nombre = data['nombre']
-            precio = data['precio']
-            url = data['url']
-            producto_repository = ProductoRepository()
-            producto_repository.crear_producto(Markup(nombre), Markup(precio), Markup(url))
-        except Exception as e:
-            code = 401
-            response = {
-                'code': code,
-                'message': f'Error al crear producto {e}',
-            }
+        if headers['token'] and Jwtutils().is_valido(headers['token']) and Jwtutils().is_admin(headers['token']):
+            try:
+                data = json.loads(request.data)
+                nombre = data['nombre']
+                precio = data['precio']
+                url = data['url']
+                producto_repository = ProductoRepository()
+                producto_repository.crear_producto(Markup(nombre), Markup(precio), Markup(url))
+            except Exception as e:
+                code = 401
+                response = {
+                    'code': code,
+                    'message': f'Error al crear producto {e}',
+                }
 
     return json.dumps(response), code
 
@@ -51,5 +53,31 @@ def get_productos():
             'code': code,
             'message': f'Error al obtener productos {e}',
         }
+
+    return json.dumps(response), code
+
+@productos_bluebrint.route('/deleteproducto', methods=['DELETE'])
+@cross_origin()
+def delete_producto():
+    headers = request.headers
+    if headers['Content-Type'] != 'application/json':
+        code = 401
+        response = {
+            'code': code,
+            'message': 'Content-Type debe ser application/json'
+        }
+    else:
+        if headers['token'] and Jwtutils().is_valido(headers['token']) and Jwtutils().is_admin(headers['token']):
+            try:
+                data = json.loads(request.data)
+                id = data['id']
+                producto_repository = ProductoRepository()
+                producto_repository.delete_producto(id)
+            except Exception as e:
+                code = 401
+                response = {
+                    'code': code,
+                    'message': f'Error al eliminar producto {e}',
+                }
 
     return json.dumps(response), code

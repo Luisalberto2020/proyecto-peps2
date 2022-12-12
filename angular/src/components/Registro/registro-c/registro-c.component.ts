@@ -24,10 +24,12 @@ export class RegistroCComponent {
         body: JSON.stringify({email, password, admin}),
 
     }
+    
     console.log(options);
       fetch('http://localhost:5000/crearusuario',options).then(res => res.json()).then(data => {
         if (data.code === 200) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['']);
+          alert("Usuario creado correctamente");
         }else {
           this.mostrarFallo = true;
         }
