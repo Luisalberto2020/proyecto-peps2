@@ -12,6 +12,11 @@ productos_bluebrint = Blueprint('productos_bluebrint', __name__)
 @productos_bluebrint.route('/crearproducto', methods=['POST'])
 @cross_origin()
 def crear_producto():
+    code = 401
+    response = {
+            'code': code,
+            'message': 'Errror'
+        }
     headers = request.headers
     if headers['Content-Type'] != 'application/json':
         code = 401
@@ -25,17 +30,28 @@ def crear_producto():
                 data = json.loads(request.data)
                 nombre = data['nombre']
                 precio = data['precio']
-                url = data['url']
                 producto_repository = ProductoRepository()
-                producto_repository.crear_producto(Markup(nombre), Markup(precio), Markup(url))
+                producto_repository.crear_producto(Markup(nombre), Markup(precio),'')
+                code = 200
+                response = {
+                'code': code,
+                'message': 'insertado correctamente'
+                }
             except Exception as e:
                 code = 401
                 response = {
                     'code': code,
                     'message': f'Error al crear producto {e}',
                 }
+        else:
+            code = 401
+            response = {
+                'code': code,
+                'message': 'Token invalido',
+            }
 
     return json.dumps(response), code
+
 
 @productos_bluebrint.route('/getproductos', methods=['GET'])
 @cross_origin()
@@ -68,6 +84,7 @@ def delete_producto():
         }
     else:
         if headers['token'] and Jwtutils().is_valido(headers['token']) and Jwtutils().is_admin(headers['token']):
+            #Fixme: no funciona con token valido
             try:
                 data = json.loads(request.data)
                 id = data['id']

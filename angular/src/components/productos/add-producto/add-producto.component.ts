@@ -23,9 +23,9 @@ export class AddProductoComponent {
         'Token': this.cokies.get('token'),
         'Access-Control-Allow-Origin': '*',
       },
-      body: JSON.stringify({nombre:this.nombre, precio:this.precio, url:this.url}),
+      body: JSON.stringify({nombre:this.nombre, precio:this.precio}),
     }
-    fetch('http://localhost:5000/addproductos', options).then(res => res.json()).then(data => {
+    fetch('http://localhost:5000/crearproducto', options).then(res => res.json()).then(data => {
       console.log(data);
     });
 
