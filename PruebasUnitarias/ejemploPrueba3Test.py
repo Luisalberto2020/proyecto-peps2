@@ -7,5 +7,5 @@ class numero_primo(unittest.TestCase):
         self.assertTrue(es_primo(3))
         self.assertFalse(es_primo(8))
 if __name__ == '__main__':
-    print("hyola")
+    print("hola")
     unittest.main()

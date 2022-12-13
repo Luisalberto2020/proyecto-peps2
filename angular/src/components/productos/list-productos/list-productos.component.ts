@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Producto } from 'src/model/Producto';
+declare var $:any;
+
 
 @Component({
   selector: 'app-list-productos',
@@ -28,7 +30,14 @@ export class ListProductosComponent implements OnInit {
 
     });
   }
+  deleteProducto(index:number){
+    this.productos.splice(index,1);
+    $('.toast').toast('show');
 
-}
+  }
+
+  }
+
+
 
 

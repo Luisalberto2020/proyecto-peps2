@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../components/Registro/login/login.component';
 import { RegistroCComponent } from '../components/Registro/registro-c/registro-c.component';
@@ -15,6 +16,7 @@ import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginGuard } from 'src/Guards/LoginGuard';
 import { FormsModule } from '@angular/forms';
+import { UpdateProductoComponent } from '../components/productos/update-producto/update-producto.component';
 
 
 
@@ -32,7 +34,8 @@ const routes: Routes = [
     path: 'tienda',component:ShopComponent,
     children:[
       {path:'add',component:AddProductoComponent},
-      {path:'',component:ListProductosComponent}
+      {path:'',component:ListProductosComponent},
+      {path:'update/:id',component:UpdateProductoComponent}
     ],
     canActivate:[LoginGuard]
   },
@@ -52,12 +55,14 @@ const routes: Routes = [
     ShopComponent,
     AddProductoComponent,
     NotFoundComponent,
+    UpdateProductoComponent,
 
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+
   ],
   providers: [CookieService,LoginGuard],
   bootstrap: [AppComponent]

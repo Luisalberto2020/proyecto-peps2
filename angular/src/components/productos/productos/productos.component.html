@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
         <button type="button" class="btn btn-success mx-1" *ngIf="admin">Subir</button>
-        <button type="button" class="btn btn-danger mx-1" *ngIf="admin">Borrar</button>
-        <button type="button" class="btn btn-warning mx-1"*ngIf="admin">Editar</button>
+        <button type="button" class="btn btn-danger mx-1" *ngIf="admin" (click)="eliminarProducto()">Borrar</button>
+        <button type="button" class="btn btn-warning mx-1"*ngIf="admin" (click)="updateProducto()">Editar</button>
     </div>
   </div>

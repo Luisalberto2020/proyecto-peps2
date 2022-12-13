@@ -1,49 +1,28 @@
-<div class="container text-center">
+
+
+<div class="container">
   <div class="row">
-    <div class="col">
-      <div class="input-group ">
-        <span class="input-group-text" id="basic-addon1">Nombre del producto</span>
-        <div class="col-3">
-        <input  type="text" class="form-control text-center" placeholder="Ejemplo: Portatil Gaming" aria-label="Nombre del producto" aria-describedby="basic-addon1"  [(ngModel)]="nombre">
+    <div class="input-group m-2 mx-auto">
+      <span class="input-group-text col-3" id="basic-addon1">Nombre del producto</span>
+      <div class="col-5">
+        <input type="text" class="form-control text-center" placeholder="Ejemplo: Portatil Gaming" aria-label="Nombre del producto" aria-describedby="basic-addon1" [(ngModel)]="nombre">
       </div>
-
-      <div class="input-group">
-
-        <span class="input-group-text">Precio</span>
-        <div class="col-4">
-        <input type="text" class="form-control" aria-label="Precio" [(ngModel)]="precio">
-
-        <span class="input-group-text">€</span>
-
+    </div>
+    <div class="input-group m-2">
+      <span class="input-group-text col-3">Precio</span>
+      <input type="text" aria-label="Precio" class="col-5 text-center" [(ngModel)]="precio">
+      <span class="input-group-text">€</span>
+    </div>
+    <div class="input-group m-2">
+      <div class="col-8">
+        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" [(ngModel)]="url">
       </div>
-    <div class="input-group">
-      <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" [(ngModel)]="url">
       <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
     </div>
-    <button type="submit" class="btn btn-primary"(click)="addProducto()">Añadir</button>
-    </div>
+    <button type="submit" class="btn btn-primary col-5 mx-auto m-2" (click)="addProducto()">Añadir</button>
+  </div>
+</div>
 
-    <div class="container">
-      <div class="row">
-        <div class="input-group" style="margin: 0 auto;">
-          <span class="input-group-text col-3" id="basic-addon1">Nombre del producto</span>
-            <div class="col-5">
-              <input  type="text" class="form-control text-center" placeholder="Ejemplo: Portatil Gaming" aria-label="Nombre del producto" aria-describedby="basic-addon1"  [(ngModel)]="nombre">
-            </div>
-        </div>
-        <div class="input-group">
-          <span class="input-group-text col-3">Precio</span>
-          <input type="text" aria-label="Precio" class="col-5" [(ngModel)]="precio">
-          <span class="input-group-text">€</span>
-        </div>
-        <div class="input-group">
-          <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" [(ngModel)]="url">
-          <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
-        </div>
-        <button type="submit" class="btn btn-primary"(click)="addProducto()">Añadir</button>
-        </div>
-      </div>
-    </div>
 
 
 
