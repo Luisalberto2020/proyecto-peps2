@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Producto } from 'src/model/Producto';
 
 
@@ -12,19 +13,20 @@ export class ProductosComponent {
   @Input() index:number = 0;
   @Input() admin:boolean = false;
 
-  eliminarProducto(id:number, index:number){
+  constructor(private cookies:CookieService) { }
+
+  eliminarProducto(){
     const options = {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
+        "token" : this.cookies.get('token'),
       },
-      body: JSON.stringify({id}),
   }
   console.log(options);
-  fetch('http://localhost:5000/deleteproductos', options).then(res => res.json()).then(data => {
+  fetch('http://localhost:5000/deleteproducto/'+this.producto.id, options).then(res => res.json()).then(data => {
       //TODO: Eliminar el producto de la lista
-      
+
     });
 }
 

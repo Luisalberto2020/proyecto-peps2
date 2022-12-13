@@ -6,10 +6,10 @@ class Jwtutils:
     def create_token( user_id:str, admin:bool) -> str:
         try:
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5),
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=30 ),
                 'iat': datetime.datetime.utcnow(),
                 'sub': user_id,
-                'rol': admin
+                'admin': admin
             }
             token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         except Exception as e:
@@ -36,3 +36,8 @@ class Jwtutils:
     @staticmethod
     def is_valido( token:str) -> bool:    
         return Jwtutils.decode_token(token) is not None
+
+    @staticmethod
+    def is_admin( token:str) -> bool:
+        payload = Jwtutils.decode_token(token)
+        return payload['admin'] == True
