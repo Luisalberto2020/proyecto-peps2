@@ -3,6 +3,11 @@ Levantar el proyecto  docker-compose.yml
 ```
 docker-compose up -d 
 ```
+En caso de base de datos nueva.
+Despues dentro del contenedor mysql lanzar
+mysql -u root -p 
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';
 <b>Si es la primera vez que arrancas la aplicacion descomenta la función de crear tablas del archivo app.py</b>
 <h1>Desarrollo</h1>
 Necesario utilizar dev-container del VSCode para levantar el proyecto.
@@ -85,7 +90,21 @@ Recordemos que el componentes ahi que refrerenciar <b>&ltrouter-outlet&gt &lt/ro
 <b>Registro-c</b>: Componente que muestra el formulario de registro.
 <br>
 <b>Login</b>: Componente que muestra el formulario de login.
+<h3>Guard</h3>
+<b>LoginGuard:</b>Comprueba si existe una cookie para logearse en su funcion can activate y previene que si no esta logueado no se pueda ir a otra routa
 
+<h3>Seguridad:</h3>
+<b>JWT:</b> Es un token que se genera al logearse y se guarda en una cookie, este token se utiliza para autenticar al usuario en la aplicación web.
+<br>
+<b>Hash:</b> Es una función que se utiliza para encriptar la contraseña del usuario, para que no se pueda ver en la base de datos.
+<br>
+<b>Cookie:</b> Es un fichero que se guarda en el navegador del usuario, y que se utiliza para guardar el token de autenticación.
+<br>
+<b>XSS:</b> Hemos evitado el ataque de XSS, ya que no se muestra el contenido de la base de datos en la aplicación web, sino que se muestra el contenido de la API que evita este tipo de ataque. aparte en el cliente con angular se evita este tipo de ataque con el modulo de seguridad de angular.
+<br>
+<b>Path Traversal:</b>
+Hemos evitado el ataque de Path Traversal, ya que a la hora de subir una imagen, se comprueba que el fichero no tengo un path..
 
-
-
+<h1>Repositorio</h1>
+<a href="
+https://github.com/Luisalberto2020/proyecto-peps2">Repositorio</a>

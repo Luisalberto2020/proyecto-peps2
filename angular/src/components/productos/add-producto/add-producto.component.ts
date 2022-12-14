@@ -30,6 +30,7 @@ export class AddProductoComponent {
       console.log(data);
       if (data.code == 200) {
         console.log('Producto creado');
+        alert('Producto creado correctamente');
 
       }
 
@@ -60,6 +61,9 @@ export class AddProductoComponent {
       .then(response => {
         // La respuesta del servidor será enviada aquí
         console.log(response);
+        alert('Foto subida correctamente');
+        const toastLiveExample = document.getElementById('liveToast')
+        toastLiveExample?.classList.add('show');
       })
 
 

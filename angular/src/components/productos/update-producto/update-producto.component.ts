@@ -51,7 +51,7 @@ export class UpdateProductoComponent implements OnInit {
   }
   subirfoto() {
     console.log(this.id);
-    alert(this.id);
+
     const fileInput = document.getElementById('fotoinput') as HTMLInputElement;
     const file = fileInput?.files?.[0];
     console.log(file);
@@ -74,7 +74,7 @@ export class UpdateProductoComponent implements OnInit {
     })
       .then(response => {
         // La respuesta del servidor será enviada aquí
-        console.log(response);
+        alert('Foto subida correctamente');
       })
 
 
