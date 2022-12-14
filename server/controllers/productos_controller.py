@@ -1,3 +1,4 @@
+import os
 from flask import Blueprint, request
 from flask_cors import cross_origin
 import json
@@ -6,6 +7,9 @@ from repository.productos_repository import ProductoRepository
 from model.producto import Producto
 from utils.jwt_utils import Jwtutils
 import logging
+import uuid
+from werkzeug.utils import secure_filename
+from flask import send_from_directory
 
 productos_bluebrint = Blueprint('productos_bluebrint', __name__)
 
@@ -31,17 +35,18 @@ def crear_producto():
                 print('token valido')
                 if Jwtutils().is_admin(headers['token']):
                     print('es admin')
-                  
+                
                     try:
                         data = json.loads(request.data)
                         nombre = data['nombre']
                         precio = data['precio']
                         producto_repository = ProductoRepository()
-                        producto_repository.crear_producto(Markup(nombre), Markup(precio),'')
+                        id = producto_repository.crear_producto(Markup(nombre), Markup(precio),'')
                         code = 200
                         response = {
                         'code': code,
-                        'message': 'insertado correctamente'
+                        'message': 'insertado correctamente',
+                        'id': id
                         }
                     except Exception as e:
                         code = 401
@@ -106,7 +111,7 @@ def delete_producto(id):
 
     return json.dumps(response), code
 
-@productos_bluebrint.route('/updateproducto', methods=['PUT'])
+@productos_bluebrint.route('/updateproducto/', methods=['PUT'])
 @cross_origin()
 def update_producto():
     code = 401
@@ -173,3 +178,56 @@ def get_producto(id):
         }
 
     return json.dumps(response), code
+
+
+@productos_bluebrint.route('/subirfoto/<id>', methods=['POST'])
+@cross_origin()
+def subir_foto(id):
+    headers = request.headers
+
+    if headers['token'] and Jwtutils().is_valido(headers['token']) and Jwtutils().is_admin(headers['token']):
+        try:
+            fichero = request.files['file']
+            extension = os.path.splitext(request.url)[1]
+            imagen = uuid.uuid4()
+            sitio:str = f'/images/{imagen}.jpg'
+            f = open(sitio, 'wb')
+            f.write(fichero.read())
+            f.close()
+            producto_repository = ProductoRepository()
+            producto = producto_repository.get_producto(id)
+            logging.error(f'imagen')
+            producto_repository.update_producto(id,producto.nombre, producto.precio,str(imagen) )
+            code = 200
+            response = {
+                'code': code,
+                'message': 'Foto subida correctamente ',
+            }
+        except Exception as e:
+            code = 400
+            response = {
+                'code': code,
+                'message': f'Error al subir foto {e}',
+            }
+    else:
+        code = 401
+        response = {
+            'code': code,
+            'message': 'Token invalido',
+        }
+
+    return json.dumps(response), code
+
+
+
+@productos_bluebrint.route('/getfoto/<url>', methods=['GET'])
+@cross_origin()
+def get_fotos(url):
+    url2  =secure_filename(url)
+
+    return send_from_directory('/images/',f'{url}.jpg')
+
+
+
+
+

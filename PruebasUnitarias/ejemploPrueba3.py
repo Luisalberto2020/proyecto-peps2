@@ -20,3 +20,4 @@ def recuperar_numeros_primos(max_number):
 def es_primo(n):
     return n in recuperar_numeros_primos(n)
 print(es_primo(12))
+print(recuperar_numeros_primos(7))

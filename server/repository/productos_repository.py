@@ -12,6 +12,7 @@ class ProductoRepository(dBConnector):
         )
         self.mydb.commit()
         self.mydb.close()
+        return cursor.lastrowid
 
 
     def get_productos(self) -> list:

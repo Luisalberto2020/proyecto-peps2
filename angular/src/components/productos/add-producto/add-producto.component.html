@@ -15,9 +15,9 @@
     </div>
     <div class="input-group m-2">
       <div class="col-8">
-        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" [(ngModel)]="url">
+        <input type="file" class="form-control" id="foto" aria-describedby="inputGroupFileAddon04" aria-label="Upload" [(ngModel)]="url">
       </div>
-      <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
+      <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04"(click)="subirfoto()">Subir</button>
     </div>
     <button type="submit" class="btn btn-primary col-5 mx-auto m-2" (click)="addProducto()">Añadir</button>
   </div>

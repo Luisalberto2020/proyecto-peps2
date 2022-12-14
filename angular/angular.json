@@ -98,9 +98,12 @@
               "src/assets"
             ],
             "styles": [
+
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/aos.js"
+            ]
           }
         }
       }

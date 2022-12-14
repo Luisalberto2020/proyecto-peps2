@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Producto } from 'src/model/Producto';
@@ -9,13 +9,17 @@ import { Producto } from 'src/model/Producto';
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.scss']
 })
-export class ProductosComponent {
+export class ProductosComponent implements OnInit {
   @Input() producto:Producto = new Producto(1,'',1,'');
   @Input() index:number = 0;
   @Input() admin:boolean = false;
   @Output() deleteRequest = new EventEmitter<number>();
+  url2:string = '';
 
   constructor(private cookies:CookieService,private route:Router) { }
+  ngOnInit(): void {
+    this.url2= 'http://localhost:5000/getfoto/'+this.producto.url;
+  }
 
   eliminarProducto(){
     const options = {

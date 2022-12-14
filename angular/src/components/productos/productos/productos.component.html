@@ -1,11 +1,10 @@
-<div class="card col-4" style="width: 18rem;">
-    <img [src]="producto.url" class="card-img-top">
+<div  class="card col-4" style="width: 18rem;">
+    <img [src]="'http://localhost:5000/getfoto/'+ producto.url" class="card-img-top">
     <div class="card-body">
       <h5 class="card-title">{{producto.nombre}}</h5>
       <p class="card-text"> Precio:</p> <p> {{producto.precio}}</p>
     </div>
     <div class="card-body">
-        <button type="button" class="btn btn-success mx-1" *ngIf="admin">Subir</button>
         <button type="button" class="btn btn-danger mx-1" *ngIf="admin" (click)="eliminarProducto()">Borrar</button>
         <button type="button" class="btn btn-warning mx-1"*ngIf="admin" (click)="updateProducto()">Editar</button>
     </div>

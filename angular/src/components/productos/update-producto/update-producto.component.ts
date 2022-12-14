@@ -40,11 +40,45 @@ export class UpdateProductoComponent implements OnInit {
         'Token': this.cookies.get('token'),
         'Access-Control-Allow-Origin': '*',
       },
-     body: JSON.stringify({id:this.id,nombre:this.nombre, precio:this.precio,url:this.url}),
+    body: JSON.stringify({id:this.id,nombre:this.nombre, precio:this.precio,url:this.url}),
     }
-    fetch('http://localhost:5000/updateproducto/').then(res => res.json()).then(data => {
-      console.log(data);
+    fetch('http://localhost:5000/updateproducto/',options).then(res => res.json()).then(data => {
+      const toastLiveExample = document.getElementById('liveToast')
+      toastLiveExample?.classList.add('show');
+
+
     });
+  }
+  subirfoto() {
+    console.log(this.id);
+    alert(this.id);
+    const fileInput = document.getElementById('fotoinput') as HTMLInputElement;
+    const file = fileInput?.files?.[0];
+    console.log(file);
+
+
+    if (file != null) {
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    // Enviar el archivo al servidor utilizando fetch
+    fetch('http://localhost:5000/subirfoto/'+this.id, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Token': this.cookies.get('token'),
+        'Access-Control-Allow-Origin': '*',
+      }
+
+    })
+      .then(response => {
+        // La respuesta del servidor será enviada aquí
+        console.log(response);
+      })
+
+
+  }
   }
 
 }
