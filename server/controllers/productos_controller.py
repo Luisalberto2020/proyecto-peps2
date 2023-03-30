@@ -1,6 +1,6 @@
 import os
 from flask import Blueprint, request
-from flask_cors import cross_origin
+from flask_cors import cross_origin,escape
 import json
 from markupsafe import Markup
 from repository.productos_repository import ProductoRepository
@@ -38,8 +38,8 @@ def crear_producto():
                 
                     try:
                         data = json.loads(request.data)
-                        nombre = data['nombre']
-                        precio = data['precio']
+                        nombre = escape(data['nombre'])
+                        precio = escape(data['precio'])
                         producto_repository = ProductoRepository()
                         id = producto_repository.crear_producto(Markup(nombre), Markup(precio),'')
                         code = 200

@@ -8,8 +8,6 @@ services:
 
   server:
     build: server
-    ports:
-      - "5000:5000"
     restart: always
     depends_on:
       - db
@@ -41,3 +39,8 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=db
+  
+  apache-waf:
+    build: waf
+    ports:
+      - 9095:80 

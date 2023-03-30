@@ -1,0 +1,11 @@
+1.Cambiar claves por secretos en docker-compose
+2.Variable HOST de Python
+3.OJO con usuario (root) conexión a BBDD desde Python
+4. + apache_waf
+5. cerrar puertos publicos (apache)
+6. Dividir en subredes
+7. Pasar la seguridad de docker 
+8. Meter cabaceras seguras en python 
+9. Limpiar entrada (comprobar por si falta alguno)
+10. claves cifradas V
+11. Gestionar sesiones V

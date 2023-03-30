@@ -1,7 +1,7 @@
 import json
 import logging
 
-from flask import Blueprint, request
+from flask import Blueprint, request,escape
 from flask_cors import cross_origin
 from repository.dBConnect import dBConnector
 from repository.usuario_repository import UsuariosRepository
@@ -24,9 +24,9 @@ def crear_usuario():
     else:
         try:
             data = json.loads(request.data)
-            email = data['email']
-            password = data['password']
-            admin = data['admin']
+            email = escape(data['email'])
+            password = escape(data['password'])
+            admin = escape(data['admin'])
             usuario_repository = UsuariosRepository()
             usuario_repository.crear_usuario(Markup(email), Markup(password), admin)
             code = 200
@@ -57,8 +57,8 @@ def login_usuario():
     else:
         try:
             data = json.loads(request.data)
-            email = data['email']
-            password = data['password']
+            email = escape(data['email'])
+            password = escape(data['password'])
             usuario_repository = UsuariosRepository()
             usuario = usuario_repository.login_usuario(email, password)
             logging.error(f'usuario {usuario}')
