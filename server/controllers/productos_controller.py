@@ -1,6 +1,6 @@
 import os
 from flask import Blueprint, request
-from flask_cors import cross_origin,escape
+from flask_cors import cross_origin
 import json
 from markupsafe import Markup
 from repository.productos_repository import ProductoRepository
@@ -9,7 +9,7 @@ from utils.jwt_utils import Jwtutils
 import logging
 import uuid
 from werkzeug.utils import secure_filename
-from flask import send_from_directory
+from flask import send_from_directory, escape
 
 productos_bluebrint = Blueprint('productos_bluebrint', __name__)
 

@@ -1,12 +1,20 @@
 import mysql.connector
+import os
+
 class dBConnector():
+    
+    host = os.environ.get('DB_HOST')
+    port = os.environ.get('DB_PORT')
+    user = os.environ.get('DB_USER')
+    password = os.environ.get('DB_PASSWORD')
+    
     def connect(self):
         try:
             self.mydb = mysql.connector.connect(
-                host="db",
-                port = 3306,
-                user = "root",
-                password = "root",
+                host= self.host,
+                port = self.port,
+                user = self.user,
+                password = self.password,
             )
         except Exception as e:
             print("Error: al connectarse ", e)

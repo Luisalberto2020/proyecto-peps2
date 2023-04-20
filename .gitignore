@@ -43,3 +43,5 @@ Thumbs.db
 .angular/
 cache/
 db/
+.angular/node_modules/*
+angular/node_modules/*
