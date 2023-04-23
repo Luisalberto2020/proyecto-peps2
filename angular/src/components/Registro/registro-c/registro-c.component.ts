@@ -12,8 +12,13 @@ export class RegistroCComponent {
 
 
 
-  registrar(event:Event,email:string, password:string,admin:boolean ){
+  registrar(event:Event,email:string, password:string,admin2:boolean ){
 
+
+    let admin:number = 0;
+    if(admin2){
+      admin = 1;
+    }
 
     const options = {
         method: "POST",

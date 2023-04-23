@@ -4,8 +4,7 @@ version: '3'
 services:
   web:
     build: angular
-    ports:
-      - "8080:80"
+    restart: always
     networks:
       - web
    
@@ -19,13 +18,13 @@ services:
       - ./images:/images
     networks:
       - bd
-      - web
+      - waf-api
     environment:
-       DB_PASSWORD: /run/secrets/db_root_password
-       DB_USER: /run/secrets/db_user_password
+       DB_PASSWORD: root #/run/secrets/db_root_password
+       DB_USER: root #/run/secrets/db_user_password
        DB_PORT: 3306
        DB_HOST: db
-       TOKEN_PASSWORD: /run/secrets/token_password
+       TOKEN_PASSWORD: LDR_PEPS #/run/secrets/token_password
     secrets:
       - db_root_password
       - db_user_password
@@ -36,7 +35,7 @@ services:
     image: mariadb:10.3
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: /run/secrets/dsdsd  #root 
+      MYSQL_ROOT_PASSWORD: root #/run/secrets/db_root_password  #root 
       MYSQL_USER: user
       MYSQL_PASSWORD: user
     #command: ["mysql", "-u", "root", "-p", "root", "-e", "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root'"]
@@ -57,13 +56,17 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=db
+    networks:
+      - bd
   
   apache-waf:
     build: waf
     ports:
-      - 9095:80 
+      - 5000:5000
+      - 8080:8080
     networks:
       - web
+      - waf-api
     
 
 networks:
@@ -71,7 +74,8 @@ networks:
     driver: bridge
   web:
     driver: bridge
-
+  waf-api:
+    driver: bridge
 
 
 secrets:

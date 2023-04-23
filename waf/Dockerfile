@@ -14,5 +14,14 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install libapache2-mod-evasive
 COPY evasive.conf /etc/apache2/mods-enabled/evasive.conf
 RUN mkdir /var/log/mod_evasive && chown www-data:www-data /var/log/mod_evasive
 RUN service apache2 restart
+
+
+RUN a2enmod proxy
+RUN a2enmod proxy_http
+COPY ports.conf /etc/apache2/ports.conf
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+RUN service apache2 restart
+
+
 EXPOSE 80
 CMD ["apachectl", "-D", "FOREGROUND"]
