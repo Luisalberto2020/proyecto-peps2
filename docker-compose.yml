@@ -1,5 +1,6 @@
 version: '3'
 
+
 services:
   web:
     build: angular
@@ -24,9 +25,11 @@ services:
        DB_USER: /run/secrets/db_user_password
        DB_PORT: 3306
        DB_HOST: db
+       TOKEN_PASSWORD: /run/secrets/token_password
     secrets:
       - db_root_password
       - db_user_password
+      - token_password
   
 
   db:
@@ -68,10 +71,15 @@ networks:
     driver: bridge
   web:
     driver: bridge
-  
+
+
 
 secrets:
   db_root_password:
-    file: ./db_root_password.txt
+    file: ./secretos/db_root_password.txt
   db_user_password:
-    file: ./db_user_password.txt
+    file: ./secretos/db_user_password.txt
+  token_password:
+    file: ./secretos/token_password.txt
+
+

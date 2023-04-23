@@ -1,12 +1,17 @@
 import jwt
 import datetime
-SECRET_KEY = 'LDR_PEPS'
+import os
+
+
+SECRET_KEY = os.getenv('TOKEN_PASSWORD')
+
+
 class Jwtutils:
     @staticmethod
-    def create_token( user_id:str, admin:bool) -> str:
+    def create_token(user_id: str, admin: bool) -> str:
         try:
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=30 ),
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=30),
                 'iat': datetime.datetime.utcnow(),
                 'sub': user_id,
                 'admin': admin
@@ -16,7 +21,6 @@ class Jwtutils:
             print(e)
             return e
         return token
-
 
     @staticmethod
     def decode_token(token):
@@ -29,15 +33,13 @@ class Jwtutils:
         except jwt.InvalidTokenError:
             pass
 
-
         return payload
 
-
     @staticmethod
-    def is_valido( token:str) -> bool:    
+    def is_valido(token: str) -> bool:
         return Jwtutils.decode_token(token) is not None
 
     @staticmethod
-    def is_admin( token:str) -> bool:
+    def is_admin(token: str) -> bool:
         payload = Jwtutils.decode_token(token)
         return payload['admin'] == True
