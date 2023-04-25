@@ -12,6 +12,14 @@ app.register_blueprint(usuarios_bluebrint)
 app.register_blueprint(productos_bluebrint)
 
 
+@app.after_request
+def set_secure_headers(response):
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    response.headers['Content-Security-Policy'] = "default-src 'self'"
+    return response
+
 if __name__ == '__main__':
     db = dBConnector()
     db.createDatabase()

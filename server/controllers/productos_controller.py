@@ -29,12 +29,8 @@ def crear_producto():
             'message': 'Content-Type debe ser application/json'
         }
     else:
-        if headers['token']:
-            print(headers['token'])
-            if Jwtutils().is_valido(headers['token']):
-                print('token valido')
-                if Jwtutils().is_admin(headers['token']):
-                    print('es admin')
+        if headers['token'] and  Jwtutils().is_valido(headers['token']) and Jwtutils().is_admin(headers['token']):
+                   
                 
                     try:
                         data = json.loads(request.data)
@@ -54,12 +50,12 @@ def crear_producto():
                             'code': code,
                             'message': f'Error al crear producto {e}',
                         }
-            else:
-                code = 401
-                response = {
-                    'code': code,
-                    'message': 'Token invalido',
-                }
+        else:
+            code = 401
+            response = {
+                'code': code,
+                'message': 'Token invalido',
+            }
 
     return json.dumps(response), code
 
@@ -127,36 +123,32 @@ def update_producto():
             'message': 'Content-Type debe ser application/json'
         }
     else:
-        if headers['token']:
-            print(headers['token'])
-            if Jwtutils().is_valido(headers['token']):
-                print('token valido')
-                if Jwtutils().is_admin(headers['token']):
-                    print('es admin')
-                
-                    try:
-                        data = json.loads(request.data)
-                        nombre = data['nombre']
-                        precio = data['precio']
-                        producto_repository = ProductoRepository()
-                        producto_repository.update_producto(data['id'],Markup(nombre), Markup(precio), data['url'])
-                        code = 200
-                        response = {
-                        'code': code,
-                        'message': 'actualizado correctamente'
-                        }
-                    except Exception as e:
-                        code = 401
-                        response = {
-                            'code': code,
-                            'message': f'Error al actualizar producto {e}',
-                        }
-            else:
+        if headers['token'] and Jwtutils().is_valido(headers['token'])and  Jwtutils().is_admin(headers['token']):
+                   
+        
+            try:
+                data = json.loads(request.data)
+                nombre = data['nombre']
+                precio = data['precio']
+                producto_repository = ProductoRepository()
+                producto_repository.update_producto(data['id'],Markup(nombre), Markup(precio), data['url'])
+                code = 200
+                response = {
+                'code': code,
+                'message': 'actualizado correctamente'
+                }
+            except Exception as e:
                 code = 401
                 response = {
                     'code': code,
-                    'message': 'Token inválido',
+                    'message': f'Error al actualizar producto {e}',
                 }
+        else:
+            code = 401
+            response = {
+                'code': code,
+                'message': 'Token inválido',
+            }
 
     return json.dumps(response), code
 

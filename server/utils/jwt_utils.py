@@ -3,7 +3,7 @@ import datetime
 import os
 
 
-SECRET_KEY = os.getenv('TOKEN_PASSWORD')
+SECRET_KEY = open("/run/secrets/token_password").read()
 
 
 class Jwtutils:

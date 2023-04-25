@@ -21,13 +21,13 @@ services:
       - waf-api
     environment:
        DB_PASSWORD: root #/run/secrets/db_root_password
-       DB_USER: root #/run/secrets/db_user_password
+       DB_USER: root #/run/secrets/db_root_user
        DB_PORT: 3306
        DB_HOST: db
        TOKEN_PASSWORD: LDR_PEPS #/run/secrets/token_password
     secrets:
       - db_root_password
-      - db_user_password
+      - db_root_user
       - token_password
   
 
@@ -35,9 +35,9 @@ services:
     image: mariadb:10.3
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root #/run/secrets/db_root_password  #root 
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: /run/secrets/db_root_password  #root 
+      MYSQL_USER: /run/secrets/db_user_username
+      MYSQL_PASSWORD: /run/secrets/db_user_password
     #command: ["mysql", "-u", "root", "-p", "root", "-e", "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root'"]
     volumes:
       #- /home/ciber2/ciber/db2:/var/lib/mysql
@@ -46,7 +46,12 @@ services:
      #GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';
     networks:
       - bd
-    
+    secrets:
+      - db_root_password
+      - db_user_username
+      - db_user_password
+
+
 
   phpmyadmin:
     image: phpmyadmin
@@ -79,8 +84,12 @@ networks:
 
 
 secrets:
+  db_root_user:
+    file: ./secretos/db_root_user.txt
   db_root_password:
     file: ./secretos/db_root_password.txt
+  db_user_username:
+    file: ./secretos/db_user_username.txt
   db_user_password:
     file: ./secretos/db_user_password.txt
   token_password:

@@ -5,8 +5,8 @@ class dBConnector():
     
     host = os.environ.get('DB_HOST')
     port = os.environ.get('DB_PORT')
-    user = os.environ.get('DB_USER')
-    password = os.environ.get('DB_PASSWORD')
+    user = open("/run/secrets/db_root_user").read()
+    password = open("/run/secrets/db_root_password").read()
     
     def connect(self):
         try:
