@@ -20,11 +20,8 @@ services:
       - bd
       - waf-api
     environment:
-       DB_PASSWORD: root #/run/secrets/db_root_password
-       DB_USER: root #/run/secrets/db_root_user
        DB_PORT: 3306
        DB_HOST: db
-       TOKEN_PASSWORD: LDR_PEPS #/run/secrets/token_password
     secrets:
       - db_root_password
       - db_root_user
